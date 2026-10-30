@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#1055c9">
+  <title>Apear | Gadgets and Prices</title>
+  <style>
+    :root {
+      font-family: "Segoe UI", Arial, sans-serif;
+      color: #183251;
+      background: #f3f7ff;
+      --blue: #155eef;
+      --navy: #12386e;
+      --muted: #63748c;
+      --border: #dce7f5;
+    }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body { min-width: 320px; min-height: 100vh; margin: 0; }
+    a { color: inherit; }
+    .site-header {
+      position: sticky;
+      z-index: 5;
+      top: 0;
+      border-bottom: 1px solid rgba(220, 231, 245, .85);
+      background: rgba(255, 255, 255, .96);
+      backdrop-filter: blur(12px);
+    }
+    .nav {
+      display: flex;
+      width: min(1120px, calc(100% - 40px));
+      min-height: 72px;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+      margin: 0 auto;
+    }
+    .brand {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      color: var(--navy);
+      font-size: 1.12rem;
+      font-weight: 750;
+      letter-spacing: -.04em;
+      text-decoration: none;
+    }
+    .brand-mark {
+      display: grid;
+      width: 36px;
+      height: 36px;
+      place-items: center;
+      border-radius: 11px;
+      background: var(--blue);
+      color: white;
+    }
+    .brand-logo { display: block; width: 148px; max-height: 46px; object-fit: contain; }
+    .nav-links { display: flex; align-items: center; gap: 8px; }
+    .nav-links a {
+      padding: 10px 13px;
+      border-radius: 9px;
+      color: #435671;
+      font-size: .91rem;
+      font-weight: 600;
+      text-decoration: none;
+    }
+    .nav-links a:hover, .nav-links a[aria-current="page"] {
+      background: #edf4ff;
+      color: var(--blue);
+    }
+    .hero {
+      position: relative;
+      display: flex;
+      min-height: 390px;
+      align-items: center;
+      overflow: hidden;
+      background-color: #124fc1;
+      background-image:
+        linear-gradient(105deg, rgba(8, 43, 112, .94) 0%, rgba(17, 83, 196, .8) 48%, rgba(21, 94, 239, .2) 100%),
+        url("SERVICES.jpg");
+      background-position: center;
+      background-size: cover;
+      color: white;
+    }
+    .hero-inner {
+      width: min(1120px, calc(100% - 40px));
+      margin: 0 auto;
+      padding: 58px 0;
+    }
+    .eyebrow {
+      margin: 0 0 13px;
+      color: #d9e9ff;
+      font-size: .76rem;
+      font-weight: 750;
+      letter-spacing: .14em;
+      text-transform: uppercase;
+    }
+    .hero h1 {
+      max-width: 700px;
+      margin: 0;
+      font-size: clamp(2.5rem, 6vw, 4.6rem);
+      letter-spacing: -.06em;
+      line-height: 1.04;
+    }
+    .hero-copy {
+      max-width: 590px;
+      margin: 18px 0 25px;
+      color: #e5efff;
+      font-size: 1rem;
+      line-height: 1.75;
+    }
+    .hero-link {
+      display: inline-flex;
+      min-height: 44px;
+      align-items: center;
+      padding: 0 18px;
+      border-radius: 9px;
+      background: white;
+      color: #1454c3;
+      font-weight: 700;
+      text-decoration: none;
+    }
+    .hero-link:hover { background: #edf4ff; }
+    main { overflow: hidden; }
+    .content {
+      width: min(1120px, calc(100% - 40px));
+      margin: 0 auto;
+      padding: 54px 0 70px;
+    }
+    .section-heading { margin-bottom: 23px; }
+    .section-heading .eyebrow { margin-bottom: 8px; color: var(--blue); }
+    .section-heading h2 {
+      margin: 0;
+      color: var(--navy);
+      font-size: clamp(1.8rem, 3vw, 2.35rem);
+      letter-spacing: -.045em;
+    }
+    .section-heading > p:last-child {
+      max-width: 680px;
+      margin: 10px 0 0;
+      color: var(--muted);
+      line-height: 1.7;
+    }
+    .gadget-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 18px;
+    }
+    .gadget-card {
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      background: white;
+      box-shadow: 0 8px 25px rgba(24, 65, 125, .055);
+    }
+    .gadget-art {
+      display: grid;
+      min-height: 140px;
+      place-items: center;
+      background: linear-gradient(145deg, #e9f2ff, #d5e7ff);
+      color: var(--blue);
+      font-size: 3rem;
+    }
+    .gadget-card:nth-child(2) .gadget-art { background: linear-gradient(145deg, #e9f5ff, #cce4ff); }
+    .gadget-card:nth-child(3) .gadget-art { background: linear-gradient(145deg, #edf2ff, #d9e0ff); }
+    .gadget-copy { display: flex; flex: 1; flex-direction: column; padding: 21px; }
+    .gadget-copy h3 { margin: 0 0 8px; color: var(--navy); font-size: 1.1rem; }
+    .gadget-copy > p { margin: 0; color: var(--muted); font-size: .9rem; line-height: 1.65; }
+    .specs { display: grid; gap: 8px; margin: 14px 0 0; padding: 0; list-style: none; }
+    .specs li { color: #485d78; font-size: .83rem; line-height: 1.5; }
+    .specs strong { color: #263f60; }
+    .price { margin-top: auto; padding-top: 17px; }
+    .price-label {
+      margin: 0;
+      padding-top: 14px;
+      border-top: 1px solid #e8eef7;
+      color: #77869b;
+      font-size: .76rem;
+    }
+    .price-value { margin: 4px 0 0; color: var(--blue); font-size: 1.3rem; font-weight: 750; }
+    .price-note {
+      margin: 22px 0 0;
+      padding: 16px 18px;
+      border: 1px solid #d3e4ff;
+      border-radius: 12px;
+      background: #eaf3ff;
+      color: #3d5879;
+      font-size: .86rem;
+      line-height: 1.65;
+    }
+    .price-note strong { color: var(--navy); }
+    footer { padding: 23px 20px; background: var(--navy); color: #d8e7fb; font-size: .86rem; text-align: center; }
+    @media (max-width: 760px) {
+      .nav { width: calc(100% - 28px); gap: 8px; }
+      .nav-links { gap: 0; }
+      .nav-links a { padding: 9px 8px; font-size: .84rem; }
+      .hero { min-height: 350px; background-position: 42% center; }
+      .hero-inner { width: calc(100% - 36px); }
+      .gadget-grid { grid-template-columns: 1fr; }
+      .gadget-card { display: grid; grid-template-columns: minmax(125px, .65fr) 1.35fr; }
+      .gadget-art { min-height: 100%; }
+      .content { padding: 42px 0 52px; }
+    }
+    @media (max-width: 480px) {
+      .brand { gap: 7px; font-size: 1rem; }
+      .brand-logo { width: 126px; }
+      .nav-links a { padding: 8px 6px; font-size: .77rem; }
+      .hero { min-height: 330px; background-position: 35% center; }
+      .gadget-card { grid-template-columns: 1fr; }
+      .gadget-art { min-height: 110px; }
+    }
+  </style>
+</head>
+<body>
+  <header class="site-header">
+    <nav class="nav" aria-label="Main menu">
+      <a class="brand" href="home.html" aria-label="Apear home"><img class="brand-logo" src="OFFICIAL%20LOGO.png" alt="Apear"></a>
+      <div class="nav-links">
+        <a href="home.html">Home</a>
+        <a href="#gadgets" aria-current="page">Gadgets &amp; prices</a>
+        <a href="blogs.html">Blogs</a>
+      </div>
+    </nav>
+  </header>
+  <main>
+    <section class="hero" aria-label="Gadget services banner">
+      <div class="hero-inner">
+        <p class="eyebrow">Apear · Gadget overview</p>
+        <h1>Explore gadgets and compare prices</h1>
+        <p class="hero-copy">Get to know popular everyday gadgets, their common features, and example price ranges to help you plan your search.</p>
+        <a class="hero-link" href="#gadgets">Browse gadgets</a>
+      </div>
+    </section>
+
+    <section class="content" id="gadgets" aria-labelledby="gadgets-title">
+      <div class="section-heading">
+        <p class="eyebrow">Compare the basics</p>
+        <h2 id="gadgets-title">Popular gadgets and example prices</h2>
+        <p>Specifications vary by model. Use these general descriptions as a starting point, then check the product listing for exact details.</p>
+      </div>
+      <div class="gadget-grid">
+        <article class="gadget-card">
+          <div class="gadget-art" aria-hidden="true">▣</div>
+          <div class="gadget-copy">
+            <h3>Smartphones</h3>
+            <p>Portable devices for calls, messaging, photography, navigation, and apps.</p>
+            <ul class="specs">
+              <li><strong>Display:</strong> touchscreen; size varies by model</li>
+              <li><strong>Memory and storage:</strong> options vary by configuration</li>
+              <li><strong>Connectivity:</strong> Wi-Fi, Bluetooth, and cellular</li>
+              <li><strong>Camera:</strong> features depend on the device</li>
+            </ul>
+            <div class="price">
+              <p class="price-label">Illustrative price range (PHP)</p>
+              <p class="price-value">₱5,000–₱70,000+</p>
+            </div>
+          </div>
+        </article>
+        <article class="gadget-card">
+          <div class="gadget-art" aria-hidden="true">⌚</div>
+          <div class="gadget-copy">
+            <h3>Smartwatches</h3>
+            <p>Wearable devices for notifications and activity tracking features.</p>
+            <ul class="specs">
+              <li><strong>Display:</strong> screen type and size vary</li>
+              <li><strong>Features:</strong> activity tools and sensors vary</li>
+              <li><strong>Battery:</strong> runtime depends on model and use</li>
+              <li><strong>Compatibility:</strong> check support for your phone</li>
+            </ul>
+            <div class="price">
+              <p class="price-label">Illustrative price range (PHP)</p>
+              <p class="price-value">₱1,000–₱40,000+</p>
+            </div>
+          </div>
+        </article>
+        <article class="gadget-card">
+          <div class="gadget-art" aria-hidden="true">♫</div>
+          <div class="gadget-copy">
+            <h3>Wireless earbuds</h3>
+            <p>Bluetooth headphones for listening to audio and taking calls.</p>
+            <ul class="specs">
+              <li><strong>Connection:</strong> Bluetooth</li>
+              <li><strong>Charging:</strong> rechargeable earbuds and case</li>
+              <li><strong>Microphones:</strong> included; call quality varies</li>
+              <li><strong>Extra features:</strong> vary by model</li>
+            </ul>
+            <div class="price">
+              <p class="price-label">Illustrative price range (PHP)</p>
+              <p class="price-value">₱500–₱20,000+</p>
+            </div>
+          </div>
+        </article>
+      </div>
+      <p class="price-note"><strong>Price information:</strong> These are broad, illustrative category ranges—not current quotes or prices for specific products. Actual prices and specifications vary by brand, model, retailer, and date. Check the seller or manufacturer for up-to-date product details.</p>
+    </section>
+  </main>
+  <footer>Apear · Gadget information for everyday life</footer>
+</body>
+</html>
